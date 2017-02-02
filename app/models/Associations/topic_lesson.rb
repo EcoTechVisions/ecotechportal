@@ -1,0 +1,2 @@
+class TopicLesson < ApplicationRecord
+end
