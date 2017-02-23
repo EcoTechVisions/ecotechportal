@@ -1,49 +1,90 @@
 class CreateCompanies < ActiveRecord::Migration[5.0]
   def change
     create_table :companies do |c|
-  		c.string :name
-  		c.integer :owner_id, index: true, foreign_key: :user_id
-  		c.string :approved
+      c.string :approved
+      
+      c.string :name
+      c.references :user
+      
+      c.string :address_1
+      c.string :address_2
+      c.string :city
+      c.string :state
+      c.string :country
+      c.string :zipcode
+      
+      c.string :phone_number
+      c.string :email
+      c.string :website
+
+      c.string :legal
+      c.string :dba
+      c.string :brand
+      c.string :subsidiaries
+
+
+      c.string :chairman
+      c.string :president
+      c.string :ceo
+      c.string :cfo
+      c.string :coo
+      c.string :num_members
+      # OWNERS???
+      
+      # c.date :founded
+      # c.date :year_prd_introduced
+      # c.text :stage
+      # c.text :progress
+      # c.text :milestones
+      # c.text :dev_indicators
+      # c.text :dev_indicators
+
+      c.string :industry
+      c.string :category
+      c.string :subcategory, array: true
+      c.string :tags, array: true
+      c.string :slug
+      c.string :refnumber, unique: true
+      c.string :privacy
+      
+      c.string :avatar
+      c.string :banner
+      c.string :theme_1
+      c.string :theme_2
 
       c.timestamps
     end
 
-    create_table :profiles do |p|
-      p.references :profileable
-      p.date :founded
-  		p.string :skills
-  		p.string :languages
-  		p.string :about
-  		p.text :bio
+    add_index :companies, :tags, using: 'gin'
 
-  		p.string :avatar
-  		p.string :banner
-  		p.string :theme_1
-  		p.string :theme_2
 
-  		p.string :email
-  		p.string :phone_number
-  		p.string :website
 
-  		p.string :address_1
-  		p.string :address_2
-  		p.string :city
-  		p.string :state
-  		p.string :country
-  		p.string :zipcode
+    create_table :questionnaires do |q|
+      q.string :title
+      q.string :category
 
-  		p.string :industry
-  		p.string :category
-  		p.string :subcategory, array: true
-  		p.string :slug
-  		p.string :tags, array: true
-  		p.string :refnumber, unique: true
-  		p.string :privacy
-
-      p.timestamps
+      q.timestamps
     end
 
-    add_index :profiles, :tags, using: 'gin'
+    create_table :questions do |q|
+      q.string :question
+      q.string :question_type
+      q.references :questionnaire
+
+      q.timestamps
+    end
+
+    create_table :answers do |a|
+      a.string :answer
+      a.references :question
+      a.references :company
+
+      a.timestamps
+    end
+
+
+
+
 
     create_table :members do |m|
       m.references :company

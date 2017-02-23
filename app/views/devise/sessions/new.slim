@@ -1,0 +1,90 @@
+.full_top style="background-image:url('/assets/bg.jpg'); padding-top:50px;"
+  .row
+    .col-sm-6
+      .home_logo
+        img src="/assets/Echotech_Visions_white.png"
+    
+    .col-sm-6
+      .login_form style="padding:20px 30px;"
+        h2 style="color:white;" Login
+        br
+        = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+          - if Rails.env == "development"
+        
+            = f.email_field :email, autofocus: true, value:'aldelcy@ecotechvisions.com'
+            br
+            = f.password_field :password, autocomplete: "off", value:'test1234'
+          
+          - else
+            
+            = f.email_field :email, autofocus: true, placeholder:'E-mail'
+            br
+            = f.password_field :password, autocomplete: "off", placeholder:'Password'
+          br
+          - if devise_mapping.rememberable?
+            = f.check_box :remember_me
+            | Remember Me
+          br
+          br
+          br
+          .actions
+            = f.submit "Log in"
+        = render "devise/shared/links"
+
+.row.wrapper
+  .col-sm-6
+    .vertical_text.right
+      h2 EcoPreneur Portal
+      | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+      br
+      br
+      h4 Get information anywhere
+
+  .col-sm-6
+    img src="/assets/lady_on_computer.jpeg" width="100%"
+
+.wrapper
+  .row
+    .col-sm-4.center
+      .ion.medium.ion-leaf
+      h4 style="color:#1eb473;" Create
+      | 
+      br
+      br
+
+    .col-sm-4.center
+      .ion.medium.ion-ios-chatboxes
+      h4 style="color:#1eb473;" Community
+      | Connect with the rich and diverse community as well as our staff 
+      br
+      br
+
+    .col-sm-4.center
+      .ion.medium.ion-clipboard
+      h4 style="color:#1eb473;" Goals
+      | Communicate with
+      br
+      br
+
+
+
+.row.wrapper
+  .col-sm-6
+    img src="/assets/student_1.jpg" width="100%"
+  
+  .col-sm-6
+    .vertical_text
+      h2 Student Portal
+      | Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+      br
+      br
+      h4 Get information anywhere
+
+
+.full_height.bg_scroll.center style="background-image:url('/assets/bg2.jpg'); background-position:20% 5%; height:50%;"
+  .row.wrapper
+    .col-sm-6
+    .col-sm-6.frosted.rounded style="padding:20px 25px;"
+      h2 Become a member
+      a href='http://ecotechvisions.com/membership/'
+        button.green.big.round_edge Get Started

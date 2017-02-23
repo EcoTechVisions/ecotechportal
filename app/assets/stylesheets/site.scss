@@ -2,84 +2,19 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+@import 'application';
 
-body {
-  background-color: #fff;
-  color: #333;
-  font-family: verdana, arial, helvetica, sans-serif;
-  font-size: 13px;
-  line-height: 18px;
-  margin: 0;
-  height:100%;
+.home_logo{
+	width:40%; min-width:300px; margin:0 auto 5px;
+	img{ width:100%; }
 }
 
-html, body {
-  margin:0px auto;
-  height:100%;
-  transition: 0.5s;
-}
-html{overflow-y:scroll;}
-
-p, ol, ul, td {
-  font-family: verdana, arial, helvetica, sans-serif;
-  font-size: 13px;
-  line-height: 18px;
-  margin: 33px;
-}
-
-pre {
-  background-color: #eee;
-  padding: 10px;
-  font-size: 11px;
-}
-
-a {
-  &:visited {
-
-  }
-  &:hover {
-
-  }
-}
-
-th {
-  padding-bottom: 5px;
-}
-
-td {
-  padding-bottom: 7px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-div {
-  &.field, &.actions {
-    margin-bottom: 10px;
-  }
-}
-
-button, input[type='submit']{
-  border:1px solid white; border-radius:3px;
-  background-color:transparent; color:white;
-  float: none; display:inline-block; margin:5px;
-  &:hover{
-    background-color:white;
-    color: #999;
-  }
-}
-form.button_to{
-  float: none; display:inline-block;
-  width: auto;
-}
-
-input[type='checkbox']{
-  float: none; display:inline-block; margin:5px;
-}
-
-input{
-  border-radius:3px; border:1px solid white;
-  margin:5px; padding:5px 10px;
-  color: #333;
+.frosted{
+	background-color:rgba(white, 0.85);
+	overflow:hidden; color:#333;
+	&.rounded{
+		border-radius:10px;
+	}
 }
 
 .login_form{
@@ -92,76 +27,48 @@ input{
   a{ color:#fff; }
 }
 
-#notice {
-  color: green;
+.home_icons{
+  max-width:100px; min-width:50px;
+  margin:0 auto;
 }
 
-.field_with_errors {
-  padding: 2px;
-  background-color: red;
-  display: table;
-}
-
-#error_explanation {
-  width: 450px;
-  border: 2px solid red;
-  padding: 7px;
-  padding-bottom: 0;
-  margin-bottom: 20px;
-  background-color: #f0f0f0;
-
-  h2 {
-    text-align: left;
-    font-weight: bold;
-    padding: 5px 5px 5px 15px;
-    font-size: 12px;
-    margin: -7px;
-    margin-bottom: 0;
-    background-color: #c00;
-    color: #fff;
+.sub_menu{
+  max-width:1100px; margin:0 auto; padding:10px 0 5px;
+  overflow: hidden;
+  & .item{
+    font-size:12px; border-radius:0; color:#333;
+    float:left; padding:10px 15px; margin:0;
+    &:hover{ background-color:#333; color:white; }
+    &.right{ float:right; }
   }
+  img{float:left;}
+  & .user_info{ margin-top:0; float:left; } 
+}
 
-  ul li {
-    font-size: 12px;
-    list-style: square;
+.course_card{
+  position: relative; overflow:hidden;
+  text-align: center;
+  min-width:250px; width:20%;
+  border:1px solid #9DC5FF; padding:5px; margin:5px 0; 
+  float:none; display:inline-block;
+  background-color:#9DC5FF; color:white; 
+  font-family:$primary_font; font-size:13px;
+  & .name{
+    padding:15% 0;
   }
+  &:hover{ background-color:#C3D9FF; border:1px solid #C3D9FF;}
 }
 
-label {
-  display: block;
-}
-
-
-
-.home_window{
-	position:relative;
-	max-height:80%;
-	
-	background-color:#333;
-	text-align:center;
-	padding-bottom:15%;
-	& .logo{
-		color:white !important;
-		font-family: 'gotham';
-		margin:0 auto 5px;
-		img{
-			width: 70%;
-			min-width:250px; 
-			max-width:400px;
-		}
-	}
-	& .slogan{
-		color:white !important;
-		font-size: 15px;
-		font-family: 'comforta';
-	}
-}
-.menu{
-	margin-bottom:15%;
-	padding:10px 40px;
-	overflow:hidden;
-	text-align:left;
-	.user_btn{
-		background-color:rgba(#626363, 0.5);
-	}
+.class_card{
+  position: relative; overflow:hidden;
+  text-align: center;
+  min-width:250px; width:20%;
+  border:1px solid #333; padding:5px; margin:5px 0; 
+  float:none; display:inline-block;
+  background-color:#333; color:white; 
+  font-family:$primary_font; font-size:13px;
+  & .name{
+    padding:5% 0;
+  }
+  &:hover{ background-color:#999; border:1px solid #999;}
 }

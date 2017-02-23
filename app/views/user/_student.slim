@@ -1,0 +1,23 @@
+
+
+.wrapper
+	- if current_user.classes.size>0
+		h3 #{ link_to "Courses", courses_path }
+		hr
+		- current_user.classes.each do |cls|
+			- cls.courses.each do |crs|
+				a href="#{course_path(cls)}"
+					.course_card
+						.name
+							= crs.name
+	
+	div style="margin:20px 0;"
+
+	- if current_user.classes.size>0
+		h3 #{ link_to "Classes", groups_path }
+		hr
+		- current_user.classes.each do |cls|
+			a href="#{group_path(cls)}"
+				.class_card
+					.name
+						= cls.name

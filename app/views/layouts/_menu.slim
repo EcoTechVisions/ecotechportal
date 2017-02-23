@@ -1,0 +1,50 @@
+.menu
+    .content
+		a href="/" 
+			h2 style="float:left; margin-top:6px;" Eco
+			h2 style="float:left; font-family:'gotham';" tech
+		- if current_user
+			= link_to "Logout", destroy_user_session_path, method: :delete, class:'item right'
+
+		- else
+	    	= link_to "Register", new_user_registration_path, class:'item right'
+	    	= link_to "Login", root_path, class:'item right'
+
+- if current_user
+	.sub_menu style="padding:15px 0 10px 5px;"
+		img.img-circle src="#{current_user.profile}" width="50px"
+		.user_info
+			| #{current_user.first_name} #{current_user.last_name}
+			br
+			| #{current_user.role.capitalize}
+
+	.sub_menu
+		- if ['ecostudent','student','ecopreneur'].include? current_user.role
+			- if ['ecostudent','student'].include? current_user.role
+				= link_to "Courses", courses_path, class:'item'
+				= link_to "Alumni Group", "#", class:'item '
+
+			
+			- if ['ecostudent','ecopreneur'].include? current_user.role
+				= link_to "Events", '#', class:'item'
+				= link_to "Workshops", '#', class:'item'
+				= link_to "Ecopreuneur Guide", '#', class:'item'
+		
+		- if ['admin','staff','instructor'].include? current_user.role
+			= link_to "Timesheets", user_timesheets_path(current_user), class:'item'
+			= link_to "Events", '#', class:'item'
+
+			- if ['admin','instructor'].include? current_user.role
+				= link_to "Students", '#', class:'item'
+			
+			- if ['admin','staff'].include? current_user.role
+				= link_to "Ecopreuneurs", '#', class:'item'
+
+			- if current_user.role == 'admin'
+				= link_to "Dashboard", '#', class:'item'
+
+			
+		= link_to "Resources", '#', class:'item'
+		= link_to "To do List", "#", class:'item '
+
+		= link_to "Tickets", user_tickets_path(current_user), class:'item right'

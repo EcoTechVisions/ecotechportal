@@ -15,38 +15,74 @@ ActiveRecord::Schema.define(version: 20161219064113) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "cohort_groups", force: :cascade do |t|
-    t.integer  "cohort_id"
-    t.integer  "group_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["cohort_id"], name: "index_cohort_groups_on_cohort_id", using: :btree
-    t.index ["group_id"], name: "index_cohort_groups_on_group_id", using: :btree
-  end
-
-  create_table "cohorts", force: :cascade do |t|
-    t.string   "name"
-    t.date     "time_period"
+  create_table "answers", force: :cascade do |t|
+    t.string   "answer"
+    t.integer  "question_id"
+    t.integer  "company_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.index ["company_id"], name: "index_answers_on_company_id", using: :btree
+    t.index ["question_id"], name: "index_answers_on_question_id", using: :btree
+  end
+
+  create_table "comments", force: :cascade do |t|
+    t.string   "commentable_type"
+    t.integer  "commentable_id"
+    t.integer  "user_id"
+    t.text     "comment"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id", using: :btree
+    t.index ["user_id"], name: "index_comments_on_user_id", using: :btree
   end
 
   create_table "companies", force: :cascade do |t|
-    t.string   "name"
-    t.integer  "owner_id"
     t.string   "approved"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["owner_id"], name: "index_companies_on_owner_id", using: :btree
+    t.string   "name"
+    t.integer  "user_id"
+    t.string   "address_1"
+    t.string   "address_2"
+    t.string   "city"
+    t.string   "state"
+    t.string   "country"
+    t.string   "zipcode"
+    t.string   "phone_number"
+    t.string   "email"
+    t.string   "website"
+    t.string   "legal"
+    t.string   "dba"
+    t.string   "brand"
+    t.string   "subsidiaries"
+    t.string   "chairman"
+    t.string   "president"
+    t.string   "ceo"
+    t.string   "cfo"
+    t.string   "coo"
+    t.string   "num_members"
+    t.string   "industry"
+    t.string   "category"
+    t.string   "subcategory",               array: true
+    t.string   "tags",                      array: true
+    t.string   "slug"
+    t.string   "refnumber"
+    t.string   "privacy"
+    t.string   "avatar"
+    t.string   "banner"
+    t.string   "theme_1"
+    t.string   "theme_2"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.index ["tags"], name: "index_companies_on_tags", using: :gin
+    t.index ["user_id"], name: "index_companies_on_user_id", using: :btree
   end
 
-  create_table "course_topics", force: :cascade do |t|
-    t.integer  "topic_id"
+  create_table "course_weeks", force: :cascade do |t|
+    t.integer  "week_id"
     t.integer  "course_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["course_id"], name: "index_course_topics_on_course_id", using: :btree
-    t.index ["topic_id"], name: "index_course_topics_on_topic_id", using: :btree
+    t.index ["course_id"], name: "index_course_weeks_on_course_id", using: :btree
+    t.index ["week_id"], name: "index_course_weeks_on_week_id", using: :btree
   end
 
   create_table "courses", force: :cascade do |t|
@@ -82,12 +118,6 @@ ActiveRecord::Schema.define(version: 20161219064113) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "lessons", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "members", force: :cascade do |t|
     t.integer  "company_id"
     t.integer  "user_id"
@@ -99,45 +129,20 @@ ActiveRecord::Schema.define(version: 20161219064113) do
     t.index ["user_id"], name: "index_members_on_user_id", using: :btree
   end
 
-  create_table "profiles", force: :cascade do |t|
-    t.integer  "profileable_id"
-    t.date     "founded"
-    t.string   "skills"
-    t.string   "languages"
-    t.string   "about"
-    t.text     "bio"
-    t.string   "avatar"
-    t.string   "banner"
-    t.string   "theme_1"
-    t.string   "theme_2"
-    t.string   "email"
-    t.string   "phone_number"
-    t.string   "website"
-    t.string   "address_1"
-    t.string   "address_2"
-    t.string   "city"
-    t.string   "state"
-    t.string   "country"
-    t.string   "zipcode"
-    t.string   "industry"
+  create_table "questionnaires", force: :cascade do |t|
+    t.string   "title"
     t.string   "category"
-    t.string   "subcategory",                 array: true
-    t.string   "slug"
-    t.string   "tags",                        array: true
-    t.string   "refnumber"
-    t.string   "privacy"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-    t.index ["profileable_id"], name: "index_profiles_on_profileable_id", using: :btree
-    t.index ["tags"], name: "index_profiles_on_tags", using: :gin
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
-  create_table "requests", force: :cascade do |t|
-    t.string   "title"
-    t.text     "message"
-    t.string   "directed_to"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+  create_table "questions", force: :cascade do |t|
+    t.string   "question"
+    t.string   "question_type"
+    t.integer  "questionnaire_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.index ["questionnaire_id"], name: "index_questions_on_questionnaire_id", using: :btree
   end
 
   create_table "socials", force: :cascade do |t|
@@ -159,6 +164,23 @@ ActiveRecord::Schema.define(version: 20161219064113) do
     t.index ["user_id"], name: "index_students_on_user_id", using: :btree
   end
 
+  create_table "ticket_assignements", force: :cascade do |t|
+    t.integer  "ticket_id"
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ticket_id"], name: "index_ticket_assignements_on_ticket_id", using: :btree
+    t.index ["user_id"], name: "index_ticket_assignements_on_user_id", using: :btree
+  end
+
+  create_table "tickets", force: :cascade do |t|
+    t.string   "title"
+    t.text     "message"
+    t.string   "directed_to"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
   create_table "timesheets", force: :cascade do |t|
     t.date     "from"
     t.date     "to"
@@ -169,17 +191,9 @@ ActiveRecord::Schema.define(version: 20161219064113) do
     t.index ["user_id"], name: "index_timesheets_on_user_id", using: :btree
   end
 
-  create_table "topic_lessons", force: :cascade do |t|
-    t.integer  "topic_id"
-    t.integer  "lesson_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["lesson_id"], name: "index_topic_lessons_on_lesson_id", using: :btree
-    t.index ["topic_id"], name: "index_topic_lessons_on_topic_id", using: :btree
-  end
-
   create_table "topics", force: :cascade do |t|
     t.string   "name"
+    t.date     "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -225,7 +239,17 @@ ActiveRecord::Schema.define(version: 20161219064113) do
     t.index ["username"], name: "index_users_on_username", unique: true, using: :btree
   end
 
+  create_table "week_topics", force: :cascade do |t|
+    t.integer  "topic_id"
+    t.integer  "week_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["topic_id"], name: "index_week_topics_on_topic_id", using: :btree
+    t.index ["week_id"], name: "index_week_topics_on_week_id", using: :btree
+  end
+
   create_table "weeks", force: :cascade do |t|
+    t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

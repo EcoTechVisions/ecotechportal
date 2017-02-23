@@ -1,20 +1,6 @@
 class CreateCourses < ActiveRecord::Migration[5.0]
   def change
 
-    create_table :cohorts do |c|
-      c.string :name
-      c.date :time_period
-
-      c.timestamps
-    end
-
-    create_table :cohort_groups do |cc|
-      cc.references :cohort
-      cc.references :group
-
-      cc.timestamps
-    end
-
     create_table :groups do |c|
       c.string :name
       c.string :profile
@@ -43,35 +29,32 @@ class CreateCourses < ActiveRecord::Migration[5.0]
       v.timestamps
     end
 
-    create_table :course_topics do |ct|
-      ct.references :topic
+    create_table :course_weeks do |ct|
+      ct.references :week
       ct.references :course
 
       ct.timestamps
     end
 
-    create_table :topics do |t|
-      t.string :name
+    create_table :weeks do |w|
+      w.string :name
 
-      t.timestamps
+      w.timestamps
     end
 
-    create_table :topic_lessons do |tl|
+
+    create_table :week_topics do |tl|
       tl.references :topic
-      tl.references :lesson
+      tl.references :week
 
       tl.timestamps
     end
 
-    create_table :lessons do |l|
-      l.string :name
+    create_table :topics do |t|
+      t.string :name
+      t.date :date
 
-      l.timestamps
-    end
-
-    create_table :weeks do |w|
-
-      w.timestamps
+      t.timestamps
     end
 
   end

@@ -1,0 +1,34 @@
+.full_top style="background-image:url('/assets/bg.jpg');"
+  .row.wrapper
+    .col-sm-4
+    .col-sm-4
+      .login_form style="text-align:center;"
+        h2 style="color:white;" Register
+        hr
+        = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+          = devise_error_messages!
+          .field
+            = f.text_field :first_name, autofocus: true, placeholder:'first name'
+            = f.text_field :last_name, autofocus: true, placeholder:'last name'
+          
+            = f.email_field :email, autofocus: true, placeholder:'email'
+          
+          <label>Create Account</label>
+          .field
+            = f.text_field :username, autofocus: true, placeholder:'create username'
+            br
+            br
+            - if @minimum_password_length
+              em
+                | ( Password: 
+                = @minimum_password_length
+                |  characters minimum)
+            br
+            = f.password_field :password, autocomplete: "off", placeholder:'Create password'
+            = f.password_field :password_confirmation, autocomplete: "off", placeholder:'Repeat password'
+          .actions
+            = f.submit "Sign up"
+        = render "devise/shared/links"
+    .col-sm-4
+
+.wrapper

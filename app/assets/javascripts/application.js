@@ -14,3 +14,19 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+'use strict';
+
+var pageReady = function(){
+	
+	setTimeout(function(){
+		$('.notice').fadeOut(1000);
+		setTimeout(function(){
+			$('.notice').addClass('hide');
+		}, 1000);
+	}, 2000);
+
+};
+
+$(document).ready(pageReady);
+$(document).on('page:load', pageReady);

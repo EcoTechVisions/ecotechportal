@@ -1,2 +1,0 @@
-class CohortGroup < ApplicationRecord
-end

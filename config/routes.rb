@@ -1,28 +1,37 @@
 Rails.application.routes.draw do
+  
   authenticated do
-    root 'users#index', as: :authenticated
+    root 'user#account', as: :authenticated
   end
-  root 'site#index'
+  devise_scope :user do
+    root to: "devise/sessions#new"
+  end
 
   devise_for :users
-  resources :users
-  resources :weeks
-  resources :topics
-  resources :timesheets
-  resources :profiles
-  resources :lessons
+  resources :users do
+    resources :companies
+    resources :timesheets
+    resources :tickets
+  end
+
+  resources :courses do
+    resources :weeks do
+      resources :topics
+    end
+  end
+  
   resources :groups
-  resources :courses
-  resources :companies
-  resources :cohorts
+  
+  resources :questionnaires do
+    resources :questions do
+      resources :answers
+    end
+  end
 
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
   
-
   # HAS TO BE LAST ROUTE
   match '*unmatched_route', to: 'site#not_found', via: :all
-
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

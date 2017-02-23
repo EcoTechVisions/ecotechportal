@@ -1,2 +1,0 @@
-class TopicLesson < ApplicationRecord
-end

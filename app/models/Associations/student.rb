@@ -1,2 +1,4 @@
-class Student < ApplicationRecord
+class Associations::Student < ApplicationRecord
+	belongs_to :group
+	belongs_to :user
 end
