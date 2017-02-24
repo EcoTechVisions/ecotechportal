@@ -1,58 +1,63 @@
 class CreateCourses < ActiveRecord::Migration[5.0]
   def change
 
-    create_table :groups do |c|
-      c.string :name
-      c.string :profile
-      c.string :banner
+    create_table :groups do |t|
+      t.string :name
+      t.string :profile
+      t.string :banner
+      t.references :user
 
-      c.timestamps
+      t.timestamps
     end
     
-    create_table :students do |s|
-      s.references :user
-      s.references :group
+    create_table :students do |t|
+      t.references :user
+      t.references :group
 
-      s.timestamps
+      t.timestamps
     end
 
-    create_table :group_courses do |cc|
-      cc.references :course
-      cc.references :group
+    create_table :group_courses do |t|
+      t.references :course
+      t.references :group
 
-      cc.timestamps
+      t.timestamps
     end
 
-    create_table :courses do |v|
-      v.string :name
+    create_table :courses do |t|
+      t.string :name
+      t.text :content
 
-      v.timestamps
+      t.timestamps
     end
 
-    create_table :course_weeks do |ct|
-      ct.references :week
-      ct.references :course
+    create_table :course_weeks do |t|
+      t.references :week
+      t.references :course
 
-      ct.timestamps
+      t.timestamps
     end
 
-    create_table :weeks do |w|
-      w.string :name
+    create_table :weeks do |t|
+      t.string :name
+      t.text :content
 
-      w.timestamps
+      t.timestamps
     end
 
 
-    create_table :week_topics do |tl|
-      tl.references :topic
-      tl.references :week
+    create_table :week_topics do |t|
+      t.references :topic
+      t.references :week
 
-      tl.timestamps
+      t.timestamps
     end
 
     create_table :topics do |t|
       t.string :name
       t.date :date
+      t.text :content
+      t.text :resources
 
       t.timestamps
     end

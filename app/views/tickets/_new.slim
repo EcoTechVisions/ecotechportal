@@ -1,0 +1,9 @@
+.show_form data-form="ticket"
+	h3 New ticket
+	= simple_form_for [current_user, @new_ticket], remote: :true do |t|
+		= t.input :title, input_html: { class: 'border full' }, wrapper_html: { class: 'half' }
+		= t.input :directed_to, collection: ticket_direct, selected: ticket_selected, input_html: { class: 'border full' }, wrapper_html: { class: 'half' }
+		= t.input :body, input_html: { class: 'border full' }, as: :text
+		= t.submit 'Create Ticket', class: 'border'
+		button.red.cancel_form data-form="ticket" cancel
+		

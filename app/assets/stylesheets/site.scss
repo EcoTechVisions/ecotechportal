@@ -72,3 +72,72 @@
   }
   &:hover{ background-color:#999; border:1px solid #999;}
 }
+
+.ticket_list{
+  padding: 0;
+  overflow: hidden;
+  & .sub_menu{
+    padding:0;
+  }
+  & .left_menu{
+    padding:0;
+    width: 200px;
+    min-height:100px;  
+    float: left;
+    & .ticket{
+      cursor: pointer;
+      a{color:#333;}
+      &:hover, &.selected{ background-color:#eee; }
+    }
+  }
+  & .show_tiket{
+    border-left:1px solid #999;
+    float: left;
+    padding-top:0;
+    padding-right:0;
+    width: calc(100% - 200px);
+    overflow: hidden;
+    & .content{
+      width: calc(100% - 200px);
+      float: left;
+      padding:0;
+    }
+    & .right_menu{
+      border-left:1px solid #ddd;
+      padding-top:0;
+      padding-right:0;
+      width: 200px; 
+      float: right;
+    }
+  }
+}
+.show_form{
+  display: none;
+  div{padding:0; margin:0;}
+}
+
+.slide_show_toggle{
+  background-color:#ddd;
+  overflow: hidden;
+}
+
+.slide_show_wrapper{
+  background-color:white;
+  position:absolute; z-index:1000;
+  width:100%; padding:0;
+  top:0; bottom:0;
+  & .slide{
+    width:100%; height:100%;
+    background-size:cover;
+    & .content{
+      padding:30px 50px;
+      color: white;
+      & .profile{
+        width:300px;
+        img{ width:100%; }
+      }
+      div{padding:0;}
+    }
+    & .close{ position:absolute; bottom:10px; right:10px; color:white; }
+  }
+}

@@ -1,0 +1,8 @@
+.wrapper
+	= @rand_user.first_name
+
+.slide_show_toggle
+	div.left style="margin-top:5px;" Slide of people from Ecotech
+	= button_to "Slide Show", slideshow_path, class: 'blue right start_slide_show', method: :get, remote: true
+
+= render "slideshow"

@@ -1,0 +1,20 @@
+.wrapper
+	h3.left My Tickets
+	
+	button.border.right.start_form data-form="ticket" New Ticket
+	br
+	= render "new"
+
+	hr
+	.ticket_list
+		.sub_menu
+			= render "menu"
+		hr
+		.left_menu
+			- @tickets.each do |ticket|
+				.ticket data-show_ticket="ticket_#{ticket.refnum}"
+					= link_to ticket.title, user_ticket_path(current_user, ticket) , remote: true
+					.dot class="#{ticket_status(ticket)}"
+		.show_tiket
+			center
+				| Select a ticket

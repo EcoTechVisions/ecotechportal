@@ -22,29 +22,34 @@
 		- if ['ecostudent','student','ecopreneur'].include? current_user.role
 			- if ['ecostudent','student'].include? current_user.role
 				= link_to "Courses", courses_path, class:'item'
-				= link_to "Alumni Group", "#", class:'item '
+				= link_to "Alumni Group", allumni_path, class:'item '
+				= link_to "Jobs/Gigs", jobs_path, class:'item '
 
 			
 			- if ['ecostudent','ecopreneur'].include? current_user.role
-				= link_to "Events", '#', class:'item'
-				= link_to "Workshops", '#', class:'item'
-				= link_to "Ecopreuneur Guide", '#', class:'item'
+				= link_to "Events", events_path, class:'item'
+				= link_to "Workshops", workshops_path, class:'item'
+				= link_to "Ecopreuneur Guide", ecoguide_path, class:'item'
 		
-		- if ['admin','staff','instructor'].include? current_user.role
+		- if ['admin','employee','instructor'].include? current_user.role
 			= link_to "Timesheets", user_timesheets_path(current_user), class:'item'
-			= link_to "Events", '#', class:'item'
+			= link_to "Events", events_path, class:'item'
 
 			- if ['admin','instructor'].include? current_user.role
 				= link_to "Students", '#', class:'item'
 			
-			- if ['admin','staff'].include? current_user.role
-				= link_to "Ecopreuneurs", '#', class:'item'
+			- if ['admin','employee'].include? current_user.role
+				
 
 			- if current_user.role == 'admin'
-				= link_to "Dashboard", '#', class:'item'
+				= link_to "Ecopreuneurs", '#', class:'item'
+				= link_to "Dashboard", dashboard_path, class:'item'
 
 			
-		= link_to "Resources", '#', class:'item'
+		= link_to "Resources", resources_path, class:'item'
 		= link_to "To do List", "#", class:'item '
 
-		= link_to "Tickets", user_tickets_path(current_user), class:'item right'
+		a href="#{user_tickets_path(current_user)}" class="item right"
+			| Tickets
+			- if current_user.ticket_assignements.find_by(role:1, viewed:false)
+				.dot.red

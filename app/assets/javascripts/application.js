@@ -12,7 +12,6 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
 //= require_tree .
 
 'use strict';
@@ -25,6 +24,30 @@ var pageReady = function(){
 			$('.notice').addClass('hide');
 		}, 1000);
 	}, 2000);
+
+	// $('div').each(function(){
+ //        // Get the content
+ //        var str = $(this).html();
+ //        // Set the regex string
+ //        var regex = /(https?:\/\/([-\w\.]+)+(:\d+)?(\/([\w\/_\.]*(\?\S+)?)?)?)/ig
+ //        // Replace plain text links by hyperlinks
+ //        var replaced_text = str.replace(regex, "<a href='$1' target='_blank'>$1</a>");
+ //        // Echo link
+ //        $(this).html(replaced_text);
+ //    });
+
+ 	$('.stop_slide_show').click(function(){
+ 		$('.slide_show_wrapper').fadeToggle(1000);
+ 	});
+ 	$('.slide_show_wrapper').hover(function(){
+	 	$('body').on({
+		    'mousewheel': function(e) {
+		        if (e.target.id == 'el') return;
+		        e.preventDefault();
+		        e.stopPropagation();
+		    }
+		})
+	});
 
 };
 

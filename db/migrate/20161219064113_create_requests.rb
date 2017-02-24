@@ -4,8 +4,10 @@ class CreateRequests < ActiveRecord::Migration[5.0]
 
     create_table :tickets do |t|
       t.string :title
-      t.text :message
+      t.text :body
       t.string :directed_to
+      t.string :refnum
+      t.integer :status, default: 0
 
       t.timestamps
     end
@@ -13,6 +15,8 @@ class CreateRequests < ActiveRecord::Migration[5.0]
     create_table :ticket_assignements do |t|
       t.references :ticket
       t.references :user
+      t.integer :role
+      t.boolean :viewed, default: false
 
       t.timestamps
     end
@@ -42,7 +46,7 @@ class CreateRequests < ActiveRecord::Migration[5.0]
       t.timestamps
     end
 
-    create_table :event_connection do |t|
+    create_table :event_connections do |t|
       t.references :eventable, polymorphic: true, index: true
       t.references :event
 

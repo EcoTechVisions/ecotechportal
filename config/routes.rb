@@ -20,6 +20,11 @@ Rails.application.routes.draw do
     end
   end
   
+  resources :posts
+  
+  resources :comments
+  resources :jobs
+  resources :events
   resources :groups
   
   resources :questionnaires do
@@ -27,6 +32,13 @@ Rails.application.routes.draw do
       resources :answers
     end
   end
+
+  get 'allumni' => "site#allumni"
+  get 'ecoguide' => "site#ecoguide"
+  get 'resources' => "site#resources"
+  get 'dashboard' => "site#dashboard"
+  get 'slideshow' => "site#slideshow"
+  get 'workshops' => "events#workshops"
 
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"

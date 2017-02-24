@@ -5,6 +5,7 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
 
+'use strict';
 
 var pageReady = function(){
 
@@ -24,6 +25,25 @@ var pageReady = function(){
 	// $( window ).resize(function() {
 	//   sameHeight();
 	// });
+
+	$('.start_form').on('click', function(event){
+		event.preventDefault();
+		var form = $(this).data('form');
+		$('.show_form[data-form="'+form+'"]').slideToggle();
+	});
+
+	$('.cancel_form').on('click', function(event){
+		event.preventDefault();
+		var form = $(this).data('form');
+		$('.show_form[data-form="'+form+'"]').slideToggle();
+		$(this).closest($('form')).find("input[type=text], textarea").val("");
+	});
+
+	$('.ticket').on('click', function(event){
+		event.preventDefault();
+		$('.ticket').removeClass('selected')
+		$(this).addClass('selected');
+	});
 
 };
 

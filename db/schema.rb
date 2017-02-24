@@ -29,7 +29,7 @@ ActiveRecord::Schema.define(version: 20161219064113) do
     t.string   "commentable_type"
     t.integer  "commentable_id"
     t.integer  "user_id"
-    t.text     "comment"
+    t.text     "body"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable_type_and_commentable_id", using: :btree
@@ -87,6 +87,29 @@ ActiveRecord::Schema.define(version: 20161219064113) do
 
   create_table "courses", force: :cascade do |t|
     t.string   "name"
+    t.text     "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "event_connection", force: :cascade do |t|
+    t.string   "eventable_type"
+    t.integer  "eventable_id"
+    t.integer  "event_id"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.index ["event_id"], name: "index_event_connection_on_event_id", using: :btree
+    t.index ["eventable_type", "eventable_id"], name: "index_event_connection_on_eventable_type_and_eventable_id", using: :btree
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string   "title"
+    t.text     "body"
+    t.string   "link"
+    t.string   "cost"
+    t.string   "image"
+    t.date     "start_date"
+    t.date     "end_date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -114,8 +137,23 @@ ActiveRecord::Schema.define(version: 20161219064113) do
     t.string   "name"
     t.string   "profile"
     t.string   "banner"
+    t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_groups_on_user_id", using: :btree
+  end
+
+  create_table "jobs", force: :cascade do |t|
+    t.string   "title"
+    t.text     "message"
+    t.string   "link"
+    t.string   "contact"
+    t.string   "contact_email"
+    t.string   "rate"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.datetime "created_at",    null: false
+    t.datetime "updated_at",    null: false
   end
 
   create_table "members", force: :cascade do |t|
@@ -127,6 +165,15 @@ ActiveRecord::Schema.define(version: 20161219064113) do
     t.datetime "updated_at", null: false
     t.index ["company_id"], name: "index_members_on_company_id", using: :btree
     t.index ["user_id"], name: "index_members_on_user_id", using: :btree
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.integer  "postable_id"
+    t.string   "title"
+    t.text     "body"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["postable_id"], name: "index_posts_on_postable_id", using: :btree
   end
 
   create_table "questionnaires", force: :cascade do |t|
@@ -167,18 +214,22 @@ ActiveRecord::Schema.define(version: 20161219064113) do
   create_table "ticket_assignements", force: :cascade do |t|
     t.integer  "ticket_id"
     t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "role"
+    t.boolean  "viewed",     default: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.index ["ticket_id"], name: "index_ticket_assignements_on_ticket_id", using: :btree
     t.index ["user_id"], name: "index_ticket_assignements_on_user_id", using: :btree
   end
 
   create_table "tickets", force: :cascade do |t|
     t.string   "title"
-    t.text     "message"
+    t.text     "body"
     t.string   "directed_to"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.string   "refnum"
+    t.integer  "status",      default: 0
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "timesheets", force: :cascade do |t|
@@ -194,6 +245,8 @@ ActiveRecord::Schema.define(version: 20161219064113) do
   create_table "topics", force: :cascade do |t|
     t.string   "name"
     t.date     "date"
+    t.text     "content"
+    t.text     "resources"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -204,6 +257,7 @@ ActiveRecord::Schema.define(version: 20161219064113) do
     t.string   "email",                  default: "", null: false
     t.string   "username"
     t.date     "age"
+    t.string   "eco_title"
     t.string   "about"
     t.string   "photo"
     t.string   "banner"
@@ -250,6 +304,7 @@ ActiveRecord::Schema.define(version: 20161219064113) do
 
   create_table "weeks", force: :cascade do |t|
     t.string   "name"
+    t.text     "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

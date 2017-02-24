@@ -6,7 +6,9 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-User.create([{ first_name:'Al', last_name:'Delcy', username:'aldelcy', email:'aldelcy@ecotechvisions.com', password:'test1234', password_confirmation:'test1234', role: 0, approved: true}])
+User.create([{ first_name:'Al', last_name:'Delcy', username:'aldelcy', email:'aldelcy@ecotechvisions.com', password:'test1234', password_confirmation:'test1234', role: 0, approved: true},
+			 { first_name:'Bob', last_name:'Delcy', username:'bobdelcy', email:'bobdelcy@ecotechvisions.com', password:'test1234', password_confirmation:'test1234', role: 1, approved: true},
+			 { first_name:'Jane', last_name:'Delcy', username:'janedelcy', email:'janedelcy@ecotechvisions.com', password:'test1234', password_confirmation:'test1234', role: 2, approved: true}])
 
 Questionnaire.create(title:"Developmental Stage", category:'company')
 Question.create([{ question:"Year the Company was founded &amp; Incorporated:", question_type:"text", questionnaire_id: Questionnaire.last.id},
@@ -62,3 +64,11 @@ Associations::WeekTopic.create([{ topic_id:1, week_id:1}, { topic_id:2, week_id:
 Group.create(name:'Cohort 3')
 Associations::Student.create([{ group_id:1, user_id:1}])
 Associations::GroupCourse.create([{ group_id:1, course_id:1}])
+
+Ticket.create([{title:'Ticket 1', body:'This is a test ticket to test stuff that tickets do'},
+			   {title:'Ticket 2', body:'This is a test ticket 2 to test stuff that tickets 2 do'}])
+Associations::TicketAssignement.create([{ticket_id:1, user_id:1, role:0},
+										{ticket_id:1, user_id:2, role:1},
+										{ticket_id:1, user_id:3, role:1, viewed:true},
+										{ticket_id:2, user_id:2, role:0},
+										{ticket_id:2, user_id:1, role:1}])

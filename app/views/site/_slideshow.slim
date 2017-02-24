@@ -1,0 +1,9 @@
+.slide_show_wrapper
+	.slide style="background-image:url('/assets/bg_black.jpg');"
+		.content data-content="user"
+			.profile
+				img.profile_img.img-circle src="#{@rand_user.profile}"
+				hr
+				h2.full_name #{@rand_user.first_name} #{@rand_user.last_name}
+				.user_role #{@rand_user.role}
+		.close.stop_slide_show x

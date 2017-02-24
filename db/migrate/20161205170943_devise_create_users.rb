@@ -7,6 +7,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[5.0]
       t.string :email,              null: false, default: ""
       t.string :username
       t.date :age
+      t.string :eco_title
       t.string :about
 
       t.string :photo
